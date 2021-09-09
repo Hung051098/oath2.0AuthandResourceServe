@@ -10,8 +10,8 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import com.laurentiuspilca.jwtauthserver.entities.User;
-import com.laurentiuspilca.jwtauthserver.repositories.UserRepository;
+import com.laurentiuspilca.jwtauthserver.entities.UserApp;
+import com.laurentiuspilca.jwtauthserver.repositories.UserAppRepository;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -20,13 +20,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class DefaultAuthenticationProvider implements AuthenticationProvider{
 
-    private UserRepository userRepository;
+    private UserAppRepository userRepository;
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-        Optional<User> User = userRepository.findByUsername(authentication.getName());
+        Optional<UserApp> User = userRepository.findByUsername(authentication.getName());
         if(User.isPresent()) {
-            User user = User.get();
+        	UserApp user = User.get();
             String username = authentication.getName();
             String password = (String)authentication.getCredentials();
             if(username.equalsIgnoreCase(user.getUsername()) &&
@@ -34,7 +34,7 @@ public class DefaultAuthenticationProvider implements AuthenticationProvider{
                 return new UsernamePasswordAuthenticationToken(
                         user.getUsername(),
                         user.getPassword(),
-                        Collections.singleton(new SimpleGrantedAuthority(user.getRoles()))
+                        user.getAuthorities()
                 );
             }
         }

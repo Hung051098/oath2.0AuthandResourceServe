@@ -20,6 +20,7 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,16 +29,18 @@ import com.laurentiuspilca.jwtresourceserver.request.LoginRequest;
 
 @RestController
 public class LoginController {
+	@Value("${client.id}")
+	private String clientid;
+	@Value("${client.secret}")
+	private String clientsecret;
 	@PostMapping("/login")
 	public String login(@RequestBody LoginRequest re) {
-		String username = re.getClient();
-		String password = re.getSecret();
 		try {
 			String url = "http://localhost:8081/oauth/token?grant_type=password&username=" + re.getUsername()
 					+ "&password=" + re.getPassword();
 			HttpPost request = new HttpPost(url);
 			CredentialsProvider provider = new BasicCredentialsProvider();
-			provider.setCredentials(AuthScope.ANY, new UsernamePasswordCredentials(username, password));
+			provider.setCredentials(AuthScope.ANY, new UsernamePasswordCredentials(clientid, clientsecret));
 
 			try (CloseableHttpClient httpClient = HttpClientBuilder.create().setDefaultCredentialsProvider(provider)
 					.build(); CloseableHttpResponse response = httpClient.execute(request)) {

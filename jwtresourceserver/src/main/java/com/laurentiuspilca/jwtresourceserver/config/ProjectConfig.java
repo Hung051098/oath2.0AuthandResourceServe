@@ -13,24 +13,24 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
 @Configuration
 @EnableResourceServer
-public class ProjectConfig extends ResourceServerConfigurerAdapter {
+public class ProjectConfig extends ResourceServerConfigurerAdapter{
 
-    @Bean
-    public TokenStore tokenStore() {
-        return new JwtTokenStore(jwtAccessTokenConverter());
-    }
-
-    @Bean
-    public JwtAccessTokenConverter jwtAccessTokenConverter() {
-    	JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
-        converter.setSigningKey("12345");
-        return converter;
-    }
-
-    @Override
-    public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
-        resources.tokenStore(tokenStore());
-    }
+//    @Bean
+//    public TokenStore tokenStore() {
+//        return new JwtTokenStore(jwtAccessTokenConverter());
+//    }
+//
+//    @Bean
+//    public JwtAccessTokenConverter jwtAccessTokenConverter() {
+//    	JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
+//        converter.setSigningKey("12345");
+//        return converter;
+//    }
+//
+//    @Override
+//    public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
+//        resources.tokenStore(tokenStore());
+//    }
 
 
     @Override

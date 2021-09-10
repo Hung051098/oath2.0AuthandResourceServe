@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
 import com.laurentiuspilca.jwtauthserver.entities.UserApp;
+import com.laurentiuspilca.jwtauthserver.entities.UserDetailsImpl;
 import com.laurentiuspilca.jwtauthserver.repositories.UserAppRepository;
 
 @Service(value = "userDetailsService")
@@ -22,8 +23,8 @@ public class CustomUserDetailsService implements UserDetailsService {
 
 		if (user == null)
 			throw new BadCredentialsException("Bad credentials");
-
-		new AccountStatusUserDetailsChecker().check(user);
-		return user;
+		UserDetails userDetails = new UserDetailsImpl(user);
+		new AccountStatusUserDetailsChecker().check(userDetails);
+		return userDetails;
 	}
 }

@@ -1,6 +1,8 @@
 package com.laurentiuspilca.jwtauthserver.entities;
 
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,58 +11,72 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity
-@Table(name = "user")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserDetailsImpl implements UserDetails{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private UserApp userapp;
     
-    private String username;
-    
-    private String password;
-    
-    private String email;
-    
-    private String roles;
-
+    /*
+	 * Get roles and permissions and add them as a Set of GrantedAuthority
+	 */
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		// TODO Auto-generated method stub
-		return null;
+		Set<GrantedAuthority> authorities = new HashSet<GrantedAuthority>();
+
+		userapp.getRoles().forEach(r -> {
+			authorities.add(new SimpleGrantedAuthority(r.getName()));
+			r.getPermissions().forEach(p -> {
+				authorities.add(new SimpleGrantedAuthority(p.getName()));
+			});
+		});
+
+		return authorities;
 	}
 
 	@Override
-	public boolean isAccountNonExpired() {
-		// TODO Auto-generated method stub
+	public String getPassword() {
+		return userapp.getPassword();
+	}
+
+	@Override
+	public String getUsername() {
+		return userapp.getUsername();
+	}
+
+	public String getEmail() {
+		return userapp.getEmail();
+	}
+
+	public void setEmail(String email) {
+		this.userapp.setEmail(email);;
+	}
+
+	@Override
+	public boolean isEnabled() {
 		return true;
 	}
 
 	@Override
-	public boolean isAccountNonLocked() {
-		// TODO Auto-generated method stub
+	public boolean isAccountNonExpired() {
 		return true;
 	}
 
 	@Override
 	public boolean isCredentialsNonExpired() {
-		// TODO Auto-generated method stub
 		return true;
 	}
 
 	@Override
-	public boolean isEnabled() {
-		// TODO Auto-generated method stub
+	public boolean isAccountNonLocked() {
 		return true;
 	}
 }

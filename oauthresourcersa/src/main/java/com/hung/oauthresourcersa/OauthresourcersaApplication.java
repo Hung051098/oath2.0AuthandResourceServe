@@ -7,18 +7,12 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@SuppressWarnings("deprecation")
+//@SuppressWarnings("deprecation")
 @SpringBootApplication
-@EnableResourceServer
-@RestController
+//@EnableResourceServer
 public class OauthresourcersaApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(OauthresourcersaApplication.class, args);
-	}
-	@RequestMapping(value="/api")
-	@PreAuthorize("hasAuthority('role_admin')")
-	public String success() {
-		return "SUCCESS";
 	}
 }

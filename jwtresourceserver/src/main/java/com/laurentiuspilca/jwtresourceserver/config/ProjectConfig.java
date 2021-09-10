@@ -2,6 +2,8 @@ package com.laurentiuspilca.jwtresourceserver.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
@@ -13,24 +15,8 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
 @Configuration
 @EnableResourceServer
+@EnableGlobalMethodSecurity(prePostEnabled = true) // chú ý annotation để phân quyền map vói annotation @PreAuthorize
 public class ProjectConfig extends ResourceServerConfigurerAdapter{
-
-//    @Bean
-//    public TokenStore tokenStore() {
-//        return new JwtTokenStore(jwtAccessTokenConverter());
-//    }
-//
-//    @Bean
-//    public JwtAccessTokenConverter jwtAccessTokenConverter() {
-//    	JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
-//        converter.setSigningKey("12345");
-//        return converter;
-//    }
-//
-//    @Override
-//    public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
-//        resources.tokenStore(tokenStore());
-//    }
 
 
     @Override
@@ -41,5 +27,6 @@ public class ProjectConfig extends ResourceServerConfigurerAdapter{
 				.antMatchers("/login", "/hello").permitAll()
 				.anyRequest().authenticated();
 		//@formatter:on
+
 	}
 }

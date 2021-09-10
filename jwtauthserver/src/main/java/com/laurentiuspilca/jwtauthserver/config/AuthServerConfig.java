@@ -31,17 +31,6 @@ public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
 
 	@Autowired
 	private UserDetailsService userDetailsService;
-//    @Bean
-//    public TokenStore tokenStore() {
-//        return new JwtTokenStore(jwtAccessTokenConverter());
-//    }
-//
-//    @Bean
-//    public JwtAccessTokenConverter jwtAccessTokenConverter() {
-//    	JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
-//        converter.setSigningKey("12345");
-//        return converter;
-//    }
 
 	
 	@Bean
@@ -73,9 +62,6 @@ public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
         .authenticationManager(authenticationManager)
                  .tokenStore(tokenStore())
                  .accessTokenConverter(jwtAccessTokenConverter()).userDetailsService(userDetailsService);
-//    	endpoints.tokenStore(tokenStore()).tokenEnhancer(jwtAccessTokenConverter())
-//		.authenticationManager(authenticationManager);
-
     }
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {

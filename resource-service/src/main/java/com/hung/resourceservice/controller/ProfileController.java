@@ -11,7 +11,7 @@ public class ProfileController {
 
 
     @RequestMapping(value = "/profile", method = RequestMethod.POST)
-	@PreAuthorize("hasAuthority('ROLE_user')")
+//	@PreAuthorize("hasAuthority('ROLE_user')")
     public String hello() {
         return "hello";
     }

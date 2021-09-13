@@ -1,4 +1,4 @@
-package com.hung.oauthresourcersa.config;
+package com.hung.resourceservice;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;

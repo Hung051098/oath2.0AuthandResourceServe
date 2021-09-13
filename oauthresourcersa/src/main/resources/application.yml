@@ -13,4 +13,8 @@ security:
           K+gNbbKl5K6gnZ5Vrjc/hOVOXBwEgv8xNsc6bd+oli+gYoSdao+tKN0aCJ7ldCT2
           ZpFCgTakzziaOH/ESjFRu8RoeGJJo+GWwE68RW4TZC0Rs5X4L2qer1UroPtizVuG
           ZwIDAQAB
-          -----END PUBLIC KEY-----
+          -----END PUBLIC KEY----- 
+      token-info-uri: http://localhost:8081/oauth/check_token
+    client:
+      client-id: client
+      client-secret: secret

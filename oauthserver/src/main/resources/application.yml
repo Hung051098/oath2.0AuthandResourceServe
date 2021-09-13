@@ -1,22 +1,22 @@
+server:
+  port: 9191
 spring:
-  application:
-    name: hung-oauth
   datasource:
-    url: jdbc:h2:file:C:/h2/databaseoauth2
-    driverClassName: org.h2.Driver
-    username: hung
-    password: 
+    url: jdbc:mysql://localhost:3306/authdb?createDatabaseIfNotExist=true
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    initialization-mode: always
   jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
-    hibernate.ddl-auto: create
-  h2:
-    console:
-      enabled: true
-      path: /h2
-
-basic:
-  auth:
-    client:
-      id: hung
-      pass: hung
-server:  port: 10011
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+logging:
+  level:
+    org:
+      hibernate:
+        type: trace

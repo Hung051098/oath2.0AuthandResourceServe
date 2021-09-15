@@ -3,17 +3,17 @@ server:
 security:
   oauth2:
     resource:
-      jwt:
-        key-value: |
-          -----BEGIN PUBLIC KEY-----
-          MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAl0hO14S6YW0HL4iUpom2
-          B0SlZp+nSH77WMMoMJ+EKukc6P6m+JMgtuz6pZ+lQ8xu/UQstkvkKPnE88oCz5Q8
-          cvAqDlraz+JuP5txreec/BAiTb93TIFFA8ahfOn2ay5kjhqDR9TLachb0m88VODK
-          mzwsA62B0qtmUGwvoqVwJNm6er0hOj1sO7lqncNdjjeNP5OjgLV6nq2Qv9NTAsSj
-          K+gNbbKl5K6gnZ5Vrjc/hOVOXBwEgv8xNsc6bd+oli+gYoSdao+tKN0aCJ7ldCT2
-          ZpFCgTakzziaOH/ESjFRu8RoeGJJo+GWwE68RW4TZC0Rs5X4L2qer1UroPtizVuG
-          ZwIDAQAB
-          -----END PUBLIC KEY----- 
+#      jwt:
+#        key-value: |
+#          -----BEGIN PUBLIC KEY-----
+#          MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAl0hO14S6YW0HL4iUpom2
+#          B0SlZp+nSH77WMMoMJ+EKukc6P6m+JMgtuz6pZ+lQ8xu/UQstkvkKPnE88oCz5Q8
+#          cvAqDlraz+JuP5txreec/BAiTb93TIFFA8ahfOn2ay5kjhqDR9TLachb0m88VODK
+#          mzwsA62B0qtmUGwvoqVwJNm6er0hOj1sO7lqncNdjjeNP5OjgLV6nq2Qv9NTAsSj
+#          K+gNbbKl5K6gnZ5Vrjc/hOVOXBwEgv8xNsc6bd+oli+gYoSdao+tKN0aCJ7ldCT2
+#          ZpFCgTakzziaOH/ESjFRu8RoeGJJo+GWwE68RW4TZC0Rs5X4L2qer1UroPtizVuG
+#          ZwIDAQAB
+#          -----END PUBLIC KEY----- 
       token-info-uri: http://localhost:8081/oauth/check_token
     client:
       client-id: client
